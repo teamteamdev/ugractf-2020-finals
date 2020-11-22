@@ -1,0 +1,145 @@
+.bottomhell {
+    height: 50px;
+    margin: -2em -1em -1em;
+    opacity: .75;
+    background-size: auto 100%;
+    background-image: url('bottomhell.gif');
+    background-position: center bottom;
+    z-index: 1;
+}
+
+html {
+    background: url('adbg.png');
+    background-size: 30px 30px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.content {
+    margin: 1em auto 0;
+    max-width: 900px;
+    box-sizing: border-box;
+    padding: 1em;
+
+    background-color: darkorange;
+    color: #000;
+    border: 5px inset #f60;
+    border-bottom: none;
+    font-size: 16px;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+select, input, button {
+    font: inherit;
+}
+
+select, input {
+    width: calc(100% - 8px);
+    background: #fff;
+}
+
+select[disabled], input[disabled] {
+    background: transparent;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #060;
+    border-color: #393;
+    color: #fff;
+    font-style: italic;
+}
+
+button[disabled] {
+    background: #999;
+    border-color: #bbb;
+    color: #777;
+}
+
+button:active {
+    border-style: inset;
+    outline: none;
+}
+
+button:focus {
+    outline: 1px dotted #000;
+}
+
+table {
+    max-width: 100%;
+    width: 100%;
+    border: 3px outset #900;
+    background: #900;
+}
+
+td {
+    border: 2px inset #900;
+    background: #aaa;
+}
+
+.partner td:first-child {
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+.partner td.smol {
+    font-size: 0.8em;
+    color: #999;
+}
+
+th {
+    text-align: left;
+}
+
+pre {
+    max-width: 100%;
+    white-space: pre-wrap;
+}
+
+footer {
+    padding: 3.5em 0 1em;
+    color: #900;
+    font-weight: bold;
+    font-family: 'Impact';
+    text-align-last: justify;
+    z-index: 2;
+}
+
+pre {
+    font: inherit;
+}
+
+h1, h2, h3, h4 {
+    color: #f00;
+    font-family: 'Arial Black';
+}
+
+h1 {
+    border-bottom: 1px dashed #900;
+}
+
+.block {
+    margin: 2em 0;
+}
+
+h3 {
+    display: inline-block;
+    text-align: right;
+    width: 50%;
+    float: right;
+    opacity: .5;
+    color: #940;
+    line-height: 0.8em;
+    letter-spacing: -2px;
+    font-size: 2em;
+}

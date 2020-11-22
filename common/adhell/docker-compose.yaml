@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - pg:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=adhell
+      - POSTGRES_USER=adhell
+      - POSTGRES_PASSWORD=P3eAN88VUuhrjnvw
+  hell:
+    build: backend
+    restart: always
+    volumes:
+      - ./config.yaml:/config.yaml
+    depends_on:
+      - db
+  frontend:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./frontend:/app
+    ports:
+      - 127.0.0.1:43250:80
+volumes:
+  pg:

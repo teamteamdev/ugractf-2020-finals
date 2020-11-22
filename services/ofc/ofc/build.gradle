@@ -1,0 +1,71 @@
+plugins {
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.20'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.20'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "io.ktor:ktor-freemarker:1.3.2"
+    implementation "io.ktor:ktor-server-jetty:1.3.2"
+    implementation "net.spy:spymemcached:2.12.3"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.20"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+    implementation "org.mongodb:mongodb-driver-sync:4.2.0-beta1"
+}
+
+group "ru.ugra.mydocs"
+version "2020"
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+application {
+    mainClassName = "ru.ugra.mydocs.web.MainKt"
+}
+
+task getDeps {
+    doLast {
+        configurations.getAsMap().each { name, config ->
+            try {
+                config.files
+            } catch (e) {
+                project.logger.info e.message // some cannot be resolved, silentlyish skip them
+            }
+        }
+        println("Got all dependencies")
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "ru.ugra.mydocs.web.MainKt",
+                   "Class-Path": configurations.runtime.files.collect { "lib/$it.name" }.join(" ")
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}
+
+artifacts {
+    archives fatJar
+}

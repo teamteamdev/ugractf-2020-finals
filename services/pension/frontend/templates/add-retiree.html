@@ -1,0 +1,15 @@
+{% extends "form.html" %}
+
+{% block form_main %}
+        <form method="POST">
+            {{ form.csrf_token }}
+<dl>
+            <dt>{{ form.first_name.label }}</dt><dd>{{ form.first_name }}</dd>
+            <dt>{{ form.last_name.label }}</dt><dd>{{ form.last_name }}</dd>
+            <dt>{{ form.passcode.label }}</dt><dd>{{ form.passcode }}</dd>
+            <dt>{{ form.date_of_birth.label }}</dt><dd>{{ form.date_of_birth }}</dd>
+</dl>
+            {{ form.accept_tos }} {{ form.accept_tos.label }} <br>
+            <input type="submit" value="ЗАПРОСИТЬ">
+        </form>
+{% endblock %}

@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+    estates:
+        build: .
+        ports:
+            - 9009:9009
+        volumes:
+            - ./data:/data

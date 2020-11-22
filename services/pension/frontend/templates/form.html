@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}ФГП "Росмосгоскосмос" - ЗАЯВКА{% endblock %}
+
+{% block main %}
+{% for field, errors in form.errors.items() %}
+        <div class="error">
+            {{ form[field].label }}: {{ ', '.join(errors) }}
+        </div>
+{% endfor %}
+
+        <div class="block_l">
+          <div class="filling">
+            {% block form_main %}
+            {% endblock %}
+            <br>
+            <p style="border-top: 1px solid #996; text-align: right"><small>АИС "ПЕНСИЯ-2"</small></p>
+          </div>
+        </div>
+{% endblock %}

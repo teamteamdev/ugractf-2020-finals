@@ -1,0 +1,115 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ADD-RETIREE.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT OPTIONAL RETIREES
+               ASSIGN TO "RETIREE.DB"
+               ORGANIZATION IS INDEXED
+               ACCESS MODE IS DYNAMIC
+               RECORD KEY IS RETIREE-ID.
+           SELECT INPUT-FILE
+               ASSIGN TO "INPUT.TXT"
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT OPTIONAL OUTPUT-FILE
+               ASSIGN TO "OUTPUT.TXT".
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD RETIREES.
+       01 RETIREE.
+       COPY RETIREE.
+       FD INPUT-FILE.
+       01 RETIREE-INPUT.
+           05 PASSCODE PIC 9(16).
+           05 FILLER PIC X(1) VALUE ' '.
+           05 RETIREE-NAME.
+               10 LAST-NAME PIC A(20).
+               10 FILLER PIC X(1) VALUE ' '.
+               10 FIRST-NAME PIC A(20).
+           05 FILLER PIC X(1) VALUE ' '.
+           05 DOB-INPUT PIC 9(8).
+       FD OUTPUT-FILE
+       REPORT IS OUT-REPORT.
+
+       REPORT SECTION.
+       COPY OUT-REPORT.
+`      01 REPORT-HEADING TYPE IS PAGE HEADING.
+           05 LINE 1.
+               10 COLUMN 26 PIC X(32)
+                  VALUE "RosMosGosKosmos".
+           05 LINE 2.
+               10 COLUMN 20 PIC X(40)
+                  VALUE "NOVIY PENSIONER - TOTAL REPORT".
+           05 LINE 4.
+               10 COLUMN 2 PIC X(10) VALUE "Nomer".
+               10 COLUMN 13 PIC X(20) VALUE "Imya".
+               10 COLUMN 34 PIC X(20) VALUE "Familiya".
+               10 COLUMN 55 PIC X(11) VALUE "D.rozh.".
+
+       01 REPORT-LINE TYPE IS DETAIL.
+           05 LINE PLUS 1.
+               10 COLUMN 2 PIC 9(10) SOURCE RETIREE-ID.
+               10 COLUMN 13 PIC A(20) SOURCE FIRST-NAME OF RETIREE.
+               10 COLUMN 34 PIC A(20) SOURCE LAST-NAME OF RETIREE.
+               10 COLUMN 55 PIC 9(4) SOURCE YEAR OF DOB.
+               10 COLUMN 59 PIC X(1) VALUE ".".
+               10 COLUMN 60 PIC 9(2) SOURCE MONTH OF DOB.
+               10 COLUMN 62 PIC X(1) VALUE ".".
+               10 COLUMN 63 PIC 9(2) SOURCE DOM OF DOB.
+
+       PROCEDURE DIVISION.
+           OPEN INPUT INPUT-FILE.
+           OPEN I-O RETIREES.
+           START RETIREES FIRST
+               INVALID KEY MOVE 9999999999 TO RETIREE-ID
+               NOT INVALID KEY READ RETIREES NEXT
+           END-START.
+
+           OPEN OUTPUT OUTPUT-FILE.
+           INITIATE OUT-REPORT.
+           PERFORM FOREVER
+               READ INPUT-FILE AT END
+                   EXIT PERFORM
+               END-READ
+               PERFORM PROCESS-LINE
+           END-PERFORM.
+           TERMINATE OUT-REPORT.
+           CLOSE OUTPUT-FILE.
+
+           CLOSE RETIREES.
+           CLOSE INPUT-FILE.
+           STOP RUN.
+
+       PROCESS-LINE.
+           MOVE PASSCODE OF RETIREE-INPUT TO PASSCODE OF RETIREE.
+           MOVE LAST-NAME OF RETIREE-INPUT TO LAST-NAME OF RETIREE.
+           MOVE FIRST-NAME OF RETIREE-INPUT TO FIRST-NAME OF RETIREE.
+           MOVE DOB-INPUT(1:4) TO YEAR OF DOB.
+           MOVE DOB-INPUT(5:2) TO MONTH OF DOB.
+           MOVE DOB-INPUT(7:2) TO DOM OF DOB.
+           IF PASSCODE OF RETIREE = SPACES
+               DISPLAY 'PASSCODE IS EMPTY'
+               EXIT PARAGRAPH
+           END-IF.
+           IF LAST-NAME OF RETIREE = SPACES
+               DISPLAY 'LAST NAME IS EMPTY'
+               EXIT PARAGRAPH
+           END-IF.
+           IF FIRST-NAME OF RETIREE = SPACES
+               DISPLAY 'FIRST NAME IS EMPTY'
+               EXIT PARAGRAPH
+           END-IF.
+           IF MONTH OF DOB > 12 OR MONTH OF DOB < 1
+               DISPLAY 'MONTH IS INVALID'
+               EXIT PARAGRAPH
+           END-IF.
+           IF DOM OF DOB > 31 OR DOM OF DOB < 1
+               DISPLAY 'DOM IS INVALID'
+               EXIT PARAGRAPH
+           END-IF.
+           SUBTRACT 1 FROM RETIREE-ID.
+           DISPLAY 'SUCCESS, NEW ID ' RETIREE-ID.
+           WRITE RETIREE.
+           GENERATE REPORT-LINE.

@@ -1,0 +1,8 @@
+       RD OUT-REPORT
+       PAGE LIMIT IS 34
+       HEADING 1
+       FIRST DETAIL 5
+       LAST DETAIL 29
+       FOOTING 32.
+
+       COPY OUT-REPORT-FOOTING.

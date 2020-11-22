@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<strong>Если вы уже вошли в систему,</strong> вам доступно участие в долевом строительстве. Получите приглашение в долевое строительство от другого пользователя, пройдите в <a href="/urt/random">страницу случайной долевой юрты (обновляется раз в минуту)</a>.
+
+<form method="post" action="/urt/join/0">
+А может, пришло время основать свою юрту? <input type="text" name="description" placeholder="Описание юрты"> <input type="submit" value="Основать">
+</form>
+
+<hr>
+
+<form method="post" action="/register" style="float: left; width: 30%">
+<h2>Регистрация</h2>
+<p>Имя пользователя: <input type="text" name="username">
+<p>Настоящее имя: <input type="text" name="name">
+<p>Дополнительные данные (будет не видно другим пользователям): <input type="text" name="description">
+<p>Пароль: <input type="password" name="password">
+<p><input type="submit" value="Зарегистрироваться">
+</form>
+
+<form method="post" action="/login" style="float: left; width: 30%">
+<h2>Вход</h2>
+<p>Имя пользователя: <input type="text" name="username">
+<p>Пароль: <input type="password" name="password">
+<p><input type="submit" value="Войти">
+</form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method="post" action="/logout">
+<input type="submit" value="Разлогиниться">
+</form>
+
+<h1>Юрта {{ id }}</h1>
+
+<p>Описание: {{ description }}
+
+<p>Участники:
+{% for u, uname in users %}
+<a href="/user/{{ u }}">{{ uname }}</a>
+{% endfor %}
+
+<form method="post" action="/urt/join/{{ id }}">
+<input type="submit" value="Участвовать в долевом строительстве юрты">
+</form>
+{% endblock %}

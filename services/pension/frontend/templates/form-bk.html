@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <title>ФГП "Росмосгоскосмос" - ЗАЯВКА</title>
+        <link rel="stylesheet" type="text/css" href="main.css" media="screen,projection">
+    </head>
+    <body>
+        <div>
+            {{ error_msg }}
+        </div>
+
+        {% macro render_errors(form) %}
+        {% for field, errors in form.errors.items() %}
+            <div>
+                {{ form[field].label }}: {{ ', '.join(errors) }}
+            </div>
+        {% endfor %}
+        {% endmacro %}
+
+        {{ render_errors(add_retiree_form) }}
+
+        <form method="POST" action="/add-retiree">
+            {{ add_retiree_form.csrf_token }}
+            {{ add_retiree_form.first_name.label }} {{ add_retiree_form.first_name }} <br>
+            {{ add_retiree_form.last_name.label }} {{ add_retiree_form.last_name }} <br>
+            {{ add_retiree_form.passcode.label }} {{ add_retiree_form.passcode }} <br>
+            {{ add_retiree_form.date_of_birth.label }} {{ add_retiree_form.date_of_birth }} <br>
+            {{ add_retiree_form.accept_tos }} {{ add_retiree_form.accept_tos.label }}  <br>
+            <input type="submit" value="ЗАПРОСИТЬ">
+        </form>
+
+        {{ render_errors(add_paycheck_form) }}
+
+        <form method="POST" action="/add-paycheck">
+            {{ add_paycheck_form.csrf_token }}
+            {{ add_paycheck_form.retiree_id.label }} {{ add_paycheck_form.retiree_id }} <br>
+            {{ add_paycheck_form.passcode.label }} {{ add_paycheck_form.passcode }} <br>
+            {{ add_paycheck_form.date.label }} {{ add_paycheck_form.date }} <br>
+            {{ add_paycheck_form.amount.label }} {{ add_paycheck_form.amount }} <br>
+            {{ add_paycheck_form.signature.label }} {{ add_paycheck_form.signature }}  <br>
+            <input type="submit" value="ЗАПРОСИТЬ">
+        </form>
+
+        {{ render_errors(show_paychecks_form) }}
+
+        <form method="POST" action="/show-paychecks">
+            {{ show_paychecks_form.csrf_token }}
+            {{ show_paychecks_form.retiree_id.label }} {{ show_paychecks_form.retiree_id }} <br>
+            {{ show_paychecks_form.passcode.label }} {{ show_paychecks_form.passcode }} <br>
+            <input type="submit" value="ЗАПРОСИТЬ">
+        </form>
+
+        {{ render_errors(change_passcode_form) }}
+
+        <form method="POST" action="/change-passcode">
+            {{ change_passcode_form.csrf_token }}
+            {{ change_passcode_form.retiree_id.label }} {{ change_passcode_form.retiree_id }} <br>
+            {{ change_passcode_form.passcode.label }} {{ change_passcode_form.passcode }} <br>
+            {{ change_passcode_form.new_passcode.label }} {{ change_passcode_form.new_passcode }} <br>
+            <input type="submit" value="ЗАПРОСИТЬ">
+        </form>
+    </body>
+</html>

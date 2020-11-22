@@ -1,0 +1,19 @@
+version: '2.4'
+services:
+  ofc:
+    build: ofc
+    image: ugractf/ofc
+    command: java -jar /ofc/ofc.jar
+    ports:
+      - 8600:8080
+    cpus: 0.75
+    mem_limit: "768M"
+  db:
+    image: mongo
+    restart: always
+  mc:
+    image: memcached
+    command: memcached -m 128
+    restart: always
+    ports:
+      - 11211:11211

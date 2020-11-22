@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form method="post" action="/logout">
+<input type="submit" value="Разлогиниться">
+</form>
+
+<h1>Пользователь {{ username }}</h1>
+
+<p>Имя: {{ name }}</p>
+
+<p>Описание: {% if description %} {{ description }} {% else %} Описание скрыто или недоступно {% endif %}
+
+<p>Участие в долевом строительстве юрт:
+{% if participations %}
+    {% for p in participations %}
+    <a href="/urt/{{ p }}">{{ p }}</a>
+    {% endfor %}
+{% else %}
+    Информация отсутствует или недоступна
+{% endif %}
+{% endblock %}

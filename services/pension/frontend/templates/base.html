@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><head>
+
+<title>{% block title %}ФГП "РосМосГосКосмос"{% endblock %}</title>
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+	<link rel="stylesheet" type="text/css" href="/static/main.css" media="screen,projection">
+</head>
+<body><div id="measurer"></div>
+<!--основной контейнер-->
+<div id="container">
+	<div id="mainwrap">	
+		<div class="block_banner"></div>
+	<!--шапка-->		
+		<div id="header">
+                        			<div class="logo"></div>
+		</div>
+	<!--/шапка-->
+	<!--середина-->
+	<div class="general_cont">
+
+           {% block main %}{% endblock %}
+
+	<!--/середина-->
+	</div>
+</div>
+<!--/основной контейнер-->
+
+
+<!---подвал--> 
+
+<div id="adhellBanner"></div>
+<script src="http://adhell.site/ad/renderProduction.js"></script>
+
+<div id="footer">
+	<div class="cont2">
+<div><dfn>© РосМосГосКосмос 1050-будущее</dfn></div>
+	</div>
+</div>
+<div id="adhellBanner"></div>
+<script src="http://adhell.site/ad/renderProduction.js"></script>
+</body></html>

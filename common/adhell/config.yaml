@@ -1,0 +1,2 @@
+DATABASE_URL: postgresql://adhell:P3eAN88VUuhrjnvw@db/adhell
+CHECKER_SECRET_KEY: gno8p-srs5tko8rZRN3a7EtPhd0WObZqJlmeO-eq-kU=

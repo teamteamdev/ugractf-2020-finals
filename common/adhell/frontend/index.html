@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="adhell.css" />
+        <title>ADHELL BANNER NETWORK</title>
+    </head>
+    <body>
+        <div class="content">
+          <header class="header">            
+                <img src="adhell.png" height="70px" style="float: left" title="ADHELL BANNER NETWORK" />
+                <h3 style="margin: 0">Welcome to Personal Cabinet of the Client of AD-HELL Banner Network!</h3>
+            </header>
+            <div class="block" style="clear: both">
+                <h1>Profile</h1>
+                <table class="partner">
+                    <tr>
+                        <td>Partner</td>
+                        <td id="idip"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td id="name"></td>
+                    </tr>
+                    <tr>
+                        <td>Views</td>
+                        <td id="views"></td>
+                        <td><button id="payout">Payout</button></td>
+                    </tr>
+                    <tr>
+                        <td class="smol" colspan="3">
+                            <small>You can exchange 1024<sup>x</sup> views to x units of balance.</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Balance</td>
+                        <td id="balance"></td>
+                    </tr>
+                    <tr>
+                        <td class="smol" colspan="3">
+                            <small>The more balance you have, the more frequently your banners are shown.</small>
+                        </td>
+                    </tr>
+                </table>
+                <p><button id="update" style="float:right; width: 100px">Update</button></p>
+            </div>
+            <div class="block">
+                <h1>Your Banners</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Format</th>
+                            <th>Content</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banners"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td><input type="text" id="bannerName" placeholder="Short Name" /></td>
+                            <td><select id="bannerFormat">
+                                <option value="text">Text only</option>
+                                <option value="image">Image URL</option>
+                                <option value="video">Video URL</option>
+                            </select></td>
+                            <td><input type="text" id="bannerUrl" placeholder="Content (text or URL only)" /></td>
+                            <td><button id="bannerAdd">Add</button></td>
+                        </tr>
+                    </tfoot>
+                    <template id="banner">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><pre></pre></td>
+                            <td><button>Delete</button></td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <div class="block">
+                <h1>Your Balance</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transfers"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Wire Transfer</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" placeholder="Receiver ID" id="transferTarget" /></td>
+                            <td><input type="number" placeholder="Amount" id="transferAmount" /></td>
+                            <td><button id="transferAdd">Transfer</button></td>
+                        </tr>
+                    </tfoot>
+                    <template id="transfer">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><button>Accept</button></td>
+                        </tr>
+                    </template>
+                </table>
+            </div>
+            <footer>&copy; A — D — H E L L 2 0 2 0</footer>
+            <div class="bottomhell"></div>
+        </div>
+        <script src="adhell.js"></script>
+    </body>
+</html>

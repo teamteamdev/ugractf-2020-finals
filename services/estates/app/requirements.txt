@@ -1,0 +1,3 @@
+aiohttp
+uvloop
+aiohttp_jinja2
